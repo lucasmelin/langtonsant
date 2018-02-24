@@ -9,10 +9,13 @@ let ANTLEFT = 3;
 
 let c = 0;
 
+let sliderspeed;
+
 function setup(){
-  let canvas = createCanvas(floor(0.8*displayWidth), floor(0.8*displayHeight));
+  let canvas = createCanvas(floor(0.7*displayWidth), floor(0.7*displayHeight));
   canvas.parent('sketch');
-  
+  sliderspeed = createSlider(1, 500, 10);
+  sliderspeed.position(screen.width * 0.5, (screen.height * 0.8) + 10)
   background(255);
   noStroke();
   colorMode(HSB);
@@ -59,7 +62,7 @@ function moveForward(){
 function draw(){
   c++;
   
-  for (let n = 0; n < 15; n++){
+  for (let n = 0; n < sliderspeed.value(); n++){
     let state = grid[x][y];
     
     if (state == 0){
