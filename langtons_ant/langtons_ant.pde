@@ -12,8 +12,8 @@ final int ANTLEFT = 3;
 PImage ant;
 
 void setup(){
-  size(400, 400);
-  
+  //size(400, 400);
+  fullScreen();
   grid = new int[width][height];
   ant = createImage(width, height, RGB);
   ant.loadPixels();
@@ -75,7 +75,8 @@ void moveForward(){
 void draw(){
   background(255);
   
-  for (int n = 0; n < 20; n++){
+  ant.loadPixels();
+  for (int n = 0; n < 500; n++){
     int state = grid[x][y];
     
     if (state == 0){
@@ -90,10 +91,11 @@ void draw(){
     if (grid[x][y] == 1){
       col = color(0);
     }
-    
-    ant.set(x,y,col);
+    int pix = x + y * ant.width;
+    ant.pixels[pix] = col;
     moveForward();
   }
+  ant.updatePixels();
   
   image(ant,0,0);    
 }
