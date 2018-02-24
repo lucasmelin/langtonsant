@@ -31,24 +31,6 @@ void setup(){
   
   dir = ANTUP;
   
- 
-
-}
-
-// This allows for wrapping around
-void turnRight(){
-  dir++;
-  if (dir > ANTLEFT){
-    dir = ANTUP;
-  }
-}
-
-// This allows for wrapping around
-void turnLeft(){
-  dir--;
-  if (dir < ANTUP){
-    dir = ANTLEFT;
-  }
 }
 
 void moveForward(){
@@ -62,6 +44,8 @@ void moveForward(){
     x--;
   }
   
+  
+  // Handle the wrapping around the board
   if (x > (width - 1)){
     x = 0;
   }else if (x < 0) {
@@ -72,9 +56,7 @@ void moveForward(){
     y = 0;
   }else if (y < 0) {
     y = (height - 1);
-  }
-  
-  
+  } 
 }
 
 void draw(){
@@ -85,17 +67,17 @@ void draw(){
     int state = grid[x][y];
     
     if (state == 0){
-      turnRight();
+      dir = (dir + 4 + 1) % 4;
       grid[x][y] = 1;
     }else if (state == 1){
-      turnLeft();
+      dir = (dir + 4 - 1) % 4;
       grid[x][y] = 0;
     }
     
-    
-    
+    // Default color is white
     color col = color(255);
     if (grid[x][y] == 1){
+      // Cycle through colors
       if (c >= 256){
         c=0;
       }
