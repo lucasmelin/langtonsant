@@ -11,15 +11,14 @@ final int ANTLEFT = 3;
 
 PImage ant;
 
-int red = 0;
-int green = 0;
-int blue = 0;
+int c = 0;
 
 void setup(){
   //size(400, 400);
   fullScreen();
   grid = new int[width][height];
-  ant = createImage(width, height, RGB);
+  ant = createImage(width, height, HSB);
+  colorMode(HSB);
   ant.loadPixels();
   // Initialize the image to white
   for (int i = 0; i < ant.pixels.length; i++){
@@ -80,9 +79,8 @@ void moveForward(){
 
 void draw(){
   background(255);
-  
+  c++;
   ant.loadPixels();
-  
   for (int n = 0; n < 500; n++){
     int state = grid[x][y];
     
@@ -94,21 +92,14 @@ void draw(){
       grid[x][y] = 0;
     }
     
+    
+    
     color col = color(255);
-    if (n % 3 == 0){
-      red++;
-      red = red % 255;
-    }
-    if (n % 2 == 0){
-      green++;
-      green = green % 255;
-    }
-    if (n % 1 == 0){
-      blue++;
-      blue = blue % 255;
-    }
     if (grid[x][y] == 1){
-      col = color(red, green, blue);
+      if (c >= 256){
+        c=0;
+      }
+      col = color(c, 255, 255);
     }
     int pix = x + y * ant.width;
     ant.pixels[pix] = col;
