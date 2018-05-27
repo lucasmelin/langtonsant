@@ -1,3 +1,5 @@
+![Langton's Ant](/icon-left-font.png)
+
 # Langton's Ant
 
 [View the demo.](https://lucasmelin.com/langtonsant)
